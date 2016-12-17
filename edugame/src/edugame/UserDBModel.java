@@ -24,20 +24,18 @@ public class UserDBModel {
 
 
     public static boolean mailQuery(String mail) throws IOException, ClassNotFoundException {
-        ObjectInputStream f = new ObjectInputStream(new FileInputStream("Users//users.txt"));
+        
 
-        try {
+        try(ObjectInputStream f = new ObjectInputStream(new FileInputStream("Users//users.txt"));) {
             while (true) {
                 User u = (Student) f.readObject();
                 if (u.getEmail().equals(mail)) {
-                    f.close();
-                    return false;
+                    return true;
                 }
 
             }
         } catch (EOFException ex) {
-            f.close();
-            return true;
+            return false;
         }
     }
 
@@ -52,37 +50,34 @@ public class UserDBModel {
 
 
     public static boolean UserNameQuery(String username) throws IOException, ClassNotFoundException {
-        ObjectInputStream f = new ObjectInputStream(new FileInputStream("Users//users.txt"));
-        try {
+        
+        try (ObjectInputStream f = new ObjectInputStream(new FileInputStream("Users//users.txt"));){
             while (true) {
                 User u = (Student) f.readObject();
                 if (u.getUsername().equals(username)) {
                     f.close();
-                    return false;
+                    return true;
                 }
 
             }
         } catch (EOFException ex) {
-            f.close();
-            return true;
+            return false;
         }
     }
 
 
     public static String IdentityQuery(int ID) throws IOException, ClassNotFoundException {
-        ObjectInputStream f = new ObjectInputStream(new FileInputStream("Users//users.txt"));
+        
         User u = new Student();
-        try {
+        try (ObjectInputStream f = new ObjectInputStream(new FileInputStream("Users//users.txt"));){
             while (true) {
                 u = (Student) f.readObject();
                 if (u.getID()==ID) {
-                    f.close();
                     break;
                 }
 
             }
         } catch (EOFException ex) {
-            f.close();
         } finally {
             return u.getIdentity();
         }
@@ -90,9 +85,9 @@ public class UserDBModel {
 
 
     public static void retrieve(User user, int Id) throws IOException, ClassNotFoundException {
-        ObjectInputStream f = new ObjectInputStream(new FileInputStream("Users//users.txt"));
+        
         User u = new Student();
-        try {
+        try (ObjectInputStream f = new ObjectInputStream(new FileInputStream("Users//users.txt"));){
             while (true) {
                 if (user instanceof Student) {
                     u = (Student) f.readObject();
@@ -107,14 +102,13 @@ public class UserDBModel {
 
             }
         } catch (EOFException ex) {
-            f.close();
         }
     }
     public static int UserQuery(String username, String password) throws IOException, ClassNotFoundException
     {
-        ObjectInputStream f = new ObjectInputStream(new FileInputStream("Users//users.txt"));
+        
         User u = new Student();
-        try {
+        try (ObjectInputStream f = new ObjectInputStream(new FileInputStream("Users//users.txt"));){
             while (true) {
 //                if (user instanceof Student) {
 //                    u = (Student) f.readObject();
@@ -122,13 +116,11 @@ public class UserDBModel {
                     u = (Teacher) f.readObject();
 //                }
                 if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
-                    f.close();
                     return u.getID();
                 }
 
             }
         } catch (EOFException ex) {
-            f.close();
             return -1;
         }
     }

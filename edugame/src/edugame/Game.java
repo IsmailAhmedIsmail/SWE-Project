@@ -82,10 +82,10 @@ public class Game {
         ListofLevels.add(newlevel);
         
     }
-      public boolean CheckAnswer (int LevelIndex, Answer ans)
+      public boolean CheckAnswer (int LevelIndex, String ans)
       {
           Level CheckingLevel= getlevel(LevelIndex);
-          if(ans.getAnswer().equals(CheckingLevel.getRightAnswer()))
+          if(ans.equals(CheckingLevel.getRightAnswer()))
           {
               return true;
           }
