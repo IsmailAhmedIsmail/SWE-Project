@@ -75,4 +75,16 @@ public class GameDBModel {
         
         
     }
+    public static boolean GameQuery(String Gamename , String Categoryname) throws  IOException, ClassNotFoundException{
+        Game game ;
+        try{
+        File f = new File("Games\\" + Categoryname + "\\" + Gamename + "\\info.txt");
+        ObjectInputStream in = new ObjectInputStream(new FileInputStream(f));
+        game = (Game) in.readObject();
+        }
+        catch(FileNotFoundException ex){
+            return false;
+        }
+        return true;
+    }
 }
