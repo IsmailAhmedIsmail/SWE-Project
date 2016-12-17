@@ -1,7 +1,7 @@
 
 package edugame;
 
-public class GmaeBuilder {
+public class GameBuilder {
     public static void SetName(String name){
         
     }
