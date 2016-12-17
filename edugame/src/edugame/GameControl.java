@@ -14,15 +14,26 @@ public class GameControl implements Serializable{
 //    public void intialgame(String ID){
 //        
 //    }
-    public void intilalizarray(int gameID, int UserID){
-        //to intialize the list of levels in this game to this user with his last aahivement
-        
-    }
+//    public void intilalizarray(int gameID, int UserID){
+//        //to intialize the list of levels in this game to this user with his last aahivement
+//        
+//    }
     
     public void loadLevel(int levelindex)
     {
         Level l=game.getListofLevels().get(levelindex);
         l.setNumber(levelindex);
-        GameDBModel.Retrieve(l, game.getName(), );
+//        GameDBModel.Retrieve(l, game.getName(), );
     }
+    
+    public void validateAnswer(int levelIndex, String userAnswer){
+        if(game.CheckAnswer(levelIndex, userAnswer)){
+//            AchievementDBModel.UpdateAch(Ach, levelIndex, userAnswer);
+        }
+        else{
+            GamePage.ShowMsg("Re-Enter your Answer");
+        }
+    }
+    
+    
 }
