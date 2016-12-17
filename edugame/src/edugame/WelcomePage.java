@@ -32,5 +32,9 @@ public class WelcomePage {
     public static void SelectIdentity() {
 
     }
+    
+    public static void ShowMsg(String msg){
+        System.out.println(msg);
+    }
 
 }
