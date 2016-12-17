@@ -6,19 +6,32 @@
 package edugame;
 
 import java.io.EOFException;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 
 /**
  *
  * @author IsmailAhmed
  */
 public class UserDBModel {
+  static class AppendingObjectOutputStream extends ObjectOutputStream {
 
+  public AppendingObjectOutputStream(OutputStream out) throws IOException {
+    super(out);
+  }
+
+  @Override
+  protected void writeStreamHeader() throws IOException {
+    reset();
+  }
+
+}
     public UserDBModel() {
     }
 
@@ -28,7 +41,7 @@ public class UserDBModel {
 
         try(ObjectInputStream f = new ObjectInputStream(new FileInputStream("Users//users.txt"));) {
             while (true) {
-                User u = (Student) f.readObject();
+                User u = (User) f.readObject();
                 if (u.getEmail().equals(mail)) {
                     return true;
                 }
@@ -40,9 +53,18 @@ public class UserDBModel {
     }
 
     public static void add(User u) throws FileNotFoundException, IOException {
-        ObjectOutputStream f = new ObjectOutputStream(new FileOutputStream("Users//users.txt", true));
+        File f2= new File("Users//users.txt");
+        FileOutputStream f1= new FileOutputStream(f2, true);
+        if(f2.length()==0){
+        ObjectOutputStream f = new ObjectOutputStream(f1);
         f.writeObject(u);
-        f.close();
+        f.close();}
+        else
+        {
+            AppendingObjectOutputStream f = new AppendingObjectOutputStream(f1);
+            f.writeObject(u);
+            f.close();
+        }
     }
 //    void add(String name,String gender,int age, String mail, String username, String password, int ID){
 //        User
@@ -53,7 +75,7 @@ public class UserDBModel {
         
         try (ObjectInputStream f = new ObjectInputStream(new FileInputStream("Users//users.txt"));){
             while (true) {
-                User u = (Student) f.readObject();
+                User u = (User) f.readObject();
                 if (u.getUsername().equals(username)) {
                     f.close();
                     return true;
@@ -68,10 +90,10 @@ public class UserDBModel {
 
     public static String IdentityQuery(int ID) throws IOException, ClassNotFoundException {
         
-        User u = new Student();
+        User u=null;
         try (ObjectInputStream f = new ObjectInputStream(new FileInputStream("Users//users.txt"));){
             while (true) {
-                u = (Student) f.readObject();
+                u = (User) f.readObject();
                 if (u.getID()==ID) {
                     break;
                 }
@@ -86,17 +108,12 @@ public class UserDBModel {
 
     public static void retrieve(User user, int Id) throws IOException, ClassNotFoundException {
         
-        User u = new Student();
+        User u;
         try (ObjectInputStream f = new ObjectInputStream(new FileInputStream("Users//users.txt"));){
             while (true) {
-                if (user instanceof Student) {
-                    u = (Student) f.readObject();
-                } else if (user instanceof Teacher) {
-                    u = (Teacher) f.readObject();
-                }
+                u = (User) f.readObject();
                 if (u.getID()==Id) {
                     user = u;
-                    f.close();
                     break;
                 }
 
@@ -107,13 +124,14 @@ public class UserDBModel {
     public static int UserQuery(String username, String password) throws IOException, ClassNotFoundException
     {
         
-        User u = new Student();
+        User u;
         try (ObjectInputStream f = new ObjectInputStream(new FileInputStream("Users//users.txt"));){
             while (true) {
 //                if (user instanceof Student) {
 //                    u = (Student) f.readObject();
 //                } else if (user instanceof Teacher) {
-                    u = (Teacher) f.readObject();
+//                    f.reset();
+                    u = (User) f.readObject();
 //                }
                 if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
                     return u.getID();

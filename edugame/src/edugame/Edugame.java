@@ -9,6 +9,7 @@ public class Edugame {
         WelcomePage r = new WelcomePage();
 //        r.Register();
         User u = r.Login();
+        System.out.println(u.toString());
     }
     
 }
