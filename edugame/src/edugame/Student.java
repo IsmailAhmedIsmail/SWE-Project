@@ -18,6 +18,7 @@ public class Student extends User implements Serializable{
 
     public Student(String name, String gender, int age, String email, String username, String password) {
         super(name, gender, age, email, username, password);
+        setIdentity("Student");
     }
 
     
