@@ -10,8 +10,9 @@ package edugame;
  * @author KarimEhab
  */
 public class Achievements {
-    Game game;
-    User user;
+    transient Game game;
+    transient User user;
+    int lastlevel;
 
     public Game getGame() {
         return game;
@@ -36,7 +37,6 @@ public class Achievements {
     public void setLastlevel(int lastlevel) {
         this.lastlevel = lastlevel;
     }
-    int lastlevel;
  public Achievements()
  {
      

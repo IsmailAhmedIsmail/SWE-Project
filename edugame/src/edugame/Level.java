@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author musta
  */
-public class Level implements Serializable{
+public abstract class Level implements Serializable{
     private String name;
     private String Question;
     transient private int number;
