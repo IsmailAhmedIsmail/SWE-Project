@@ -1,9 +1,11 @@
 
 import edugame.Category;
 import edugame.Game;
+import edugame.GameDBModel;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -40,14 +42,15 @@ public class HomePageControl {
           }
       return Names;
     }
-    public Game LoadGamePage (String GameName,String CategoryName)
+    public Game LoadGamePage (String GameName,String CategoryName) throws IOException, ClassNotFoundException
     {
          File file=new File(CategoryName);
+         Game game=new Game();
           if (file.isDirectory())
           {
              file = new File(CategoryName+"\\"+GameName);
-             Game game;
              GameDBModel.RetrieveGame(game,GameName);
           }
+          return game;
     }
 }

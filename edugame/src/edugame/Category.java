@@ -14,12 +14,12 @@ import java.util.ArrayList;
  */
 public class Category implements Serializable {
    public String name;
-  public  ArrayList <Game> ListofGames= new ArrayList<Game> ();
+  public  ArrayList <String> ListofGames= new ArrayList<> ();
  public Category()
  {
      
  }
-    public Category(String name,ArrayList<Game> ListofGames) {
+    public Category(String name,ArrayList<String> ListofGames) {
         this.name = name;
         this.ListofGames = ListofGames;
     }
@@ -34,14 +34,14 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public ArrayList<Game> getListofGames() {
+    public ArrayList<String> getListofGames() {
         return ListofGames;
     }
 
-    public void setListofGames(ArrayList<Game> ListofGames) {
+    public void setListofGames(ArrayList<String> ListofGames) {
         this.ListofGames = ListofGames;
     }
-    public void  Addto (Game game)
+    public void  Addto (String game)
     {
         ListofGames.add(game);
              

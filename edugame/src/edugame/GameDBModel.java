@@ -14,6 +14,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -21,7 +22,7 @@ import java.util.Arrays;
  */
 public class GameDBModel {
 
-    public static void RetrieveGame(Game game, String name) throws IOException {
+    public static void RetrieveGame(Game game, String name) throws IOException, ClassNotFoundException {
         File f = new File("Games\\" + name + "\\" + game.getName() + "\\info.txt");
         ObjectInputStream in = new ObjectInputStream(new FileInputStream(f));
         game = (Game) in.readObject();
@@ -30,7 +31,7 @@ public class GameDBModel {
 
     public static void RetrieveGames(String Catname, Category c) {
         File f = new File("Games\\" + Catname);
-        c.setList(Arrays.asList(f.list()));
+        c.setListofGames((ArrayList<String>) Arrays.asList(f.list()));
     }
 
     public static void AddGame(Game game, String Catname) throws IOException {
@@ -39,7 +40,7 @@ public class GameDBModel {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f.getAbsolutePath() + "\\info.txt", true));
         oos.writeObject(game);
         oos.close();
-        ArrayList<Level> tmp = game.getList();
+        ArrayList<Level> tmp = game.getListofLevels();
         f = new File("Games\\" + Catname + "\\" + game.getName() + "\\Levels");
         f.mkdirs();
         for (int i = 0; i < tmp.size(); i++) {
