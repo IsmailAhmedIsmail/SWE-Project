@@ -18,15 +18,16 @@ public abstract class User  implements Serializable{
     public User() {
     }
 
-    public User(String name, String gender, int age, String email, String password) {
+    public User(String name, String gender, int age, String email, String username, String password) {
         this.name = name;
         this.gender = gender;
         this.age = age;
         this.email = email;
+        this.username = username;
         this.password = password;
         this.ID= (int) Date.from(Instant.EPOCH).getTime();
-        
     }
+
     public void setIdentity(String Identity){
         this.Identity=Identity;
     }

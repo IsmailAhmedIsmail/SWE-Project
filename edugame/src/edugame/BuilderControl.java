@@ -17,7 +17,7 @@ public class BuilderControl {
       
       return GameDBModel.GameQuery(gameName, categoryName);
   }
-  public static void CreateGame(String gameName , int levelNo , String type ,Teacher Owner ){
+ /* public static void CreateGame(String gameName , int levelNo , String type ,Teacher Owner ){
     Game  game = new Game(levelNo, gameName , type ,Owner );
     for(int i=0;i<levelNo;i++ ){
         if(type .equals( "MCQ")){
@@ -36,5 +36,5 @@ public class BuilderControl {
     }
   }
 
-  
+  */
 }

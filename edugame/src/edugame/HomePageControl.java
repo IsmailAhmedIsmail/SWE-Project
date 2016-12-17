@@ -35,7 +35,8 @@ public class HomePageControl {
 //            Names = new ArrayList<>(Arrays.asList(file.list()));
 //
 //        }
-        return CategoryDBModel.RetrieveCategoryList();
+return null;
+//        return CategoryDBModel.RetrieveCategoryList();
     }
 
     public Game LoadGamePage(String GameName, String CategoryName) throws IOException, ClassNotFoundException {

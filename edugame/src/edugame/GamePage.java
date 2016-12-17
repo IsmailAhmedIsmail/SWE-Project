@@ -9,12 +9,15 @@ public class GamePage {
     }
     
     public static Level Showlevels(List<Level> levels){
-        return new Level();
+        return null;
     }
     public static Level SelectLevel(Level level){
-        return new Level();
+        return null;
     }
     public static Level ShowLevel(Level level){
-        return new Level();
+        return null;
+    }
+    public static void ShowMsg(String msg){
+        System.out.println(msg);
     }
 }
