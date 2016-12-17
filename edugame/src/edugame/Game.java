@@ -15,7 +15,7 @@ public class Game {
     String ID;
     String name;
     String type;
-    ArrayList <Level> ListofLevels= new ArrayList<Level> ();
+    transient ArrayList <Level> ListofLevels= new ArrayList<Level> ();
     Teacher Owner;
 public Game() {
         

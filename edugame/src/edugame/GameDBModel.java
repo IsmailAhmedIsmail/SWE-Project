@@ -7,6 +7,7 @@ package edugame;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -50,11 +51,28 @@ public class GameDBModel {
         }
     }
 
-    public static void Retrieve(Level lev) {
-
+    public static void Retrieve(Level lev,String Gamename,String Catname) throws FileNotFoundException, IOException, ClassNotFoundException {
+        File f = new File("Games\\" + Catname + "\\" + Gamename + "\\Levels"+lev.getNumber()+".txt");
+        ObjectInputStream ois= new ObjectInputStream(new FileInputStream(f));
+        int number= lev.getNumber();
+        if(lev instanceof MCQ)
+            lev=(MCQ)ois.readObject();
+        else if (lev instanceof TorF)
+            lev=(TorF)ois.readObject();
+        lev.setNumber(number);
+        
     }
 
-    public static void SaveLevel(List<Level> levels) {
-
+    public static void SaveLevel(Game game, String Catname) throws FileNotFoundException, IOException {
+        ArrayList<Level> levels= game.getListofLevels();
+        File f = new File("Games\\" + Catname + "\\" + game.getName() + "\\Levels");
+        for(int i=0;i<levels.size();i++)
+        {
+            ObjectOutputStream oos= new ObjectOutputStream(new FileOutputStream(f+"\\"+levels.get(i)));
+            oos.writeObject(levels.get(i));
+            oos.close();
+        }
+        
+        
     }
 }
