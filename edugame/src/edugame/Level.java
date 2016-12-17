@@ -12,10 +12,10 @@ import java.util.List;
  *
  * @author musta
  */
-public class Level implements Serializable{
+public abstract class Level implements Serializable{
     private String name;
     private String Question;
-    private int number;
+    transient private int number;
     private List<Answer> Answers;
     private String RightAnswer ;
 

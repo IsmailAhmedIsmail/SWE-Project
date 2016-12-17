@@ -5,7 +5,9 @@
  */
 package edugame;
 
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -15,16 +17,19 @@ public class Game {
     String ID;
     String name;
     String type;
-    ArrayList <Level> ListofLevels= new ArrayList<Level> ();
+    transient ArrayList <Level> ListofLevels= new ArrayList<Level> ();
     Teacher Owner;
-public Game() {
+    int Levelno;
+    public Game() {
         
     }
-    public Game(String ID, String name, String type, Teacher Owner) {
-        this.ID = ID;
+    public Game(int Levelno, String name, String type, Teacher Owner) {
+        this.ID = ID= String.valueOf(Date.from(Instant.EPOCH).getTime());
         this.name = name;
         this.type = type;
         this.Owner = Owner;
+        this.Levelno=Levelno;
+        
     }
     
     public String getID() {
@@ -55,8 +60,8 @@ public Game() {
         return ListofLevels;
     }
 
-    public void setListofLevels(ArrayList<Level> ListofLevels) {
-        this.ListofLevels = ListofLevels;
+    public void setListofLevels(Level level) {
+        this.ListofLevels .add(level);
     }
 
     public Teacher getOwner() {
