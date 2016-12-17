@@ -65,13 +65,13 @@ public class UserDBModel {
         }
     }
 
-    String IdentityQuery(String ID) throws IOException, ClassNotFoundException {
+    String IdentityQuery(int ID) throws IOException, ClassNotFoundException {
         ObjectInputStream f = new ObjectInputStream(new FileInputStream("users.txt"));
         User u = new Student();
         try {
             while (true) {
                 u = (Student) f.readObject();
-                if (u.getID().equals(ID)) {
+                if (u.getID()==ID) {
                     f.close();
                     break;
                 }
@@ -84,7 +84,7 @@ public class UserDBModel {
         }
     }
 
-    void retrieve(User user, String Id) throws IOException {
+    void retrieve(User user, int Id) throws IOException, ClassNotFoundException {
         ObjectInputStream f = new ObjectInputStream(new FileInputStream("users.txt"));
         User u = new Student();
         try {
@@ -94,7 +94,7 @@ public class UserDBModel {
                 } else if (user instanceof Teacher) {
                     u = (Teacher) f.readObject();
                 }
-                if (u.getID().equals(ID)) {
+                if (u.getID()==Id) {
                     user = u;
                     f.close();
                     break;
@@ -105,7 +105,7 @@ public class UserDBModel {
             f.close();
         }
     }
-    int UserQuery(String username, String password) throws IOException
+    int UserQuery(String username, String password) throws IOException, ClassNotFoundException
     {
         ObjectInputStream f = new ObjectInputStream(new FileInputStream("users.txt"));
         User u = new Student();
