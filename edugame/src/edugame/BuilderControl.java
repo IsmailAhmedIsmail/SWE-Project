@@ -34,11 +34,7 @@ public class BuilderControl {
              TorF lv= new TorF(GameBuilder.GetName(),GameBuilder.GetQuestion(),GameBuilder.GetRightAnswer());
         }
     }
-      
-      
-      
-      
-      
   }
 
+  
 }
