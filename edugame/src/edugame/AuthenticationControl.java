@@ -39,7 +39,7 @@ public class AuthenticationControl {
         User u;
         Homepage h;
         if (ID != -1) {
-            if (UserDBModel.IdentityQuery(ID) == "Student") {
+            if (UserDBModel.IdentityQuery(ID).equals("Student") ) {
                 u = new Student();
                 h = new Homepage();
             } else {

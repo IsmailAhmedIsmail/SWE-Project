@@ -25,7 +25,7 @@ public abstract class User  implements Serializable{
         this.email = email;
         this.username = username;
         this.password = password;
-        this.ID= (int) Date.from(Instant.EPOCH).getTime();
+        this.ID= (int) new Date().getTime();
     }
 
     public void setIdentity(String Identity){
@@ -89,5 +89,10 @@ public abstract class User  implements Serializable{
 //    public void setID(int ID) { //we handle this later
 //        this.ID = ID;
 //    }
+
+    @Override
+    public String toString() {
+        return "User{" + "name=" + name + ", gender=" + gender + ", age=" + age + ", email=" + email + ", username=" + username + ", password=" + password + ", ID=" + ID + ", Identity=" + Identity + '}';
+    }
    
 }
