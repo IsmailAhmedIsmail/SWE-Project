@@ -21,12 +21,13 @@ public class BuilderControl {
     Game  game = new Game(levelNo, gameName , type ,Owner );
     for(int i=0;i<levelNo;i++ ){
         if(type .equals( "MCQ")){
+            MCQ lv = null;
             for(int j=0;j<4;j++){
-                MCQ lv= new MCQ(GameBuilder.GetName(),GameBuilder.GetQuestion(),GameBuilder.GetRightAnswer());
-                Answer ans = new Answer(HomePage.GetAnswer(),HomePage.GetImage());
+                lv= new MCQ(GameBuilder.GetName(),GameBuilder.GetQuestion(),GameBuilder.GetRightAnswer());
+                Answer ans = new Answer(Homepage.GetAnswer(),Homepage.GetImage());
                 lv.setAnswers(ans);
             }
-            game.setListofLevels(ans);
+            game.setListofLevels(lv);
             
         }
         else{
