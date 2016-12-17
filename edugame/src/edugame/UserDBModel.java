@@ -22,7 +22,7 @@ public class UserDBModel {
     public UserDBModel() {
     }
 
-    boolean mailQuery(String mail) throws IOException, ClassNotFoundException {
+    public static boolean mailQuery(String mail) throws IOException, ClassNotFoundException {
         ObjectInputStream f = new ObjectInputStream(new FileInputStream("users.txt"));
         try {
             while (true) {
@@ -39,7 +39,7 @@ public class UserDBModel {
         }
     }
 
-    void add(User u) throws FileNotFoundException, IOException {
+    public static void add(User u) throws FileNotFoundException, IOException {
         ObjectOutputStream f = new ObjectOutputStream(new FileOutputStream("users.txt", true));
         f.writeObject(u);
         f.close();
@@ -48,7 +48,7 @@ public class UserDBModel {
 //        User
 //    }
 
-    boolean UserNameQuery(String username) throws IOException, ClassNotFoundException {
+    public static boolean UserNameQuery(String username) throws IOException, ClassNotFoundException {
         ObjectInputStream f = new ObjectInputStream(new FileInputStream("users.txt"));
         try {
             while (true) {
@@ -65,7 +65,7 @@ public class UserDBModel {
         }
     }
 
-    String IdentityQuery(int ID) throws IOException, ClassNotFoundException {
+    public static String IdentityQuery(int ID) throws IOException, ClassNotFoundException {
         ObjectInputStream f = new ObjectInputStream(new FileInputStream("users.txt"));
         User u = new Student();
         try {
@@ -84,7 +84,7 @@ public class UserDBModel {
         }
     }
 
-    void retrieve(User user, int Id) throws IOException, ClassNotFoundException {
+    public static void retrieve(User user, int Id) throws IOException, ClassNotFoundException {
         ObjectInputStream f = new ObjectInputStream(new FileInputStream("users.txt"));
         User u = new Student();
         try {
@@ -105,7 +105,7 @@ public class UserDBModel {
             f.close();
         }
     }
-    int UserQuery(String username, String password) throws IOException, ClassNotFoundException
+    public static int UserQuery(String username, String password) throws IOException, ClassNotFoundException
     {
         ObjectInputStream f = new ObjectInputStream(new FileInputStream("users.txt"));
         User u = new Student();
