@@ -28,7 +28,7 @@ public class UserDBModel {
 
         try(ObjectInputStream f = new ObjectInputStream(new FileInputStream("Users//users.txt"));) {
             while (true) {
-                User u = (Student) f.readObject();
+                User u = (User) f.readObject();
                 if (u.getEmail().equals(mail)) {
                     return true;
                 }
@@ -41,6 +41,7 @@ public class UserDBModel {
 
     public static void add(User u) throws FileNotFoundException, IOException {
         ObjectOutputStream f = new ObjectOutputStream(new FileOutputStream("Users//users.txt", true));
+        f.reset();
         f.writeObject(u);
         f.close();
     }
@@ -53,7 +54,7 @@ public class UserDBModel {
         
         try (ObjectInputStream f = new ObjectInputStream(new FileInputStream("Users//users.txt"));){
             while (true) {
-                User u = (Student) f.readObject();
+                User u = (User) f.readObject();
                 if (u.getUsername().equals(username)) {
                     f.close();
                     return true;
@@ -68,10 +69,10 @@ public class UserDBModel {
 
     public static String IdentityQuery(int ID) throws IOException, ClassNotFoundException {
         
-        User u = new Student();
+        User u=null;
         try (ObjectInputStream f = new ObjectInputStream(new FileInputStream("Users//users.txt"));){
             while (true) {
-                u = (Student) f.readObject();
+                u = (User) f.readObject();
                 if (u.getID()==ID) {
                     break;
                 }
@@ -86,17 +87,12 @@ public class UserDBModel {
 
     public static void retrieve(User user, int Id) throws IOException, ClassNotFoundException {
         
-        User u = new Student();
+        User u;
         try (ObjectInputStream f = new ObjectInputStream(new FileInputStream("Users//users.txt"));){
             while (true) {
-                if (user instanceof Student) {
-                    u = (Student) f.readObject();
-                } else if (user instanceof Teacher) {
-                    u = (Teacher) f.readObject();
-                }
+                u = (User) f.readObject();
                 if (u.getID()==Id) {
                     user = u;
-                    f.close();
                     break;
                 }
 
@@ -107,13 +103,14 @@ public class UserDBModel {
     public static int UserQuery(String username, String password) throws IOException, ClassNotFoundException
     {
         
-        User u = new Student();
+        User u;
         try (ObjectInputStream f = new ObjectInputStream(new FileInputStream("Users//users.txt"));){
             while (true) {
 //                if (user instanceof Student) {
 //                    u = (Student) f.readObject();
 //                } else if (user instanceof Teacher) {
-                    u = (Teacher) f.readObject();
+//                    f.reset();
+                    u = (User) f.readObject();
 //                }
                 if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
                     return u.getID();
