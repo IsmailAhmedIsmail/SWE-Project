@@ -69,18 +69,18 @@ public Game() {
     
     public Level getlevel(int levelindex)
     {
-        Level CurrentLevel=  ListOfLevels.get(levelindex);
+        Level CurrentLevel=  ListofLevels.get(levelindex);
         return CurrentLevel;
     }
     public void  addlevel (Level newlevel)
     {
-        ListOfLevels.add(newlevel);
+        ListofLevels.add(newlevel);
         
     }
       public boolean CheckAnswer (int LevelIndex, Answer ans)
       {
           Level CheckingLevel= getlevel(LevelIndex);
-          if(ans.answer.equalsto(CheckingLevel.RightAnswer))
+          if(ans.getAnswer().equals(CheckingLevel.getRightAnswer()))
           {
               return true;
           }

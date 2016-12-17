@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @author musta
  */
 public class AchievementDBModel  {
-    public static void RetrieveAch(Achievement Ach,int UserID,String GameID){
+    public static void RetrieveAch(Achievements Ach,int UserID,String GameID){
         
     }
 }
