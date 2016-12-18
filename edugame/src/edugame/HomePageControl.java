@@ -1,3 +1,5 @@
+package edugame;
+
 
 import edugame.Category;
 import edugame.CategoryDBModel;
@@ -7,6 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /*
@@ -19,24 +22,26 @@ import java.util.List;
  * @author KarimEhab
  */
 public class HomePageControl {
+    ArrayList<String> ListofCategories = new ArrayList<String>();
 
-    public HomePageControl() {
+    public HomePageControl() throws IOException {
+        ListofCategories = CategoryDBModel.RetrieveCategoryList();
     }
 
-    ArrayList<Category> ListofCategories = new ArrayList<Category>();
-    public ArrayList<Category> getListofCategories() {
+    public ArrayList<String> getListofCategories() {
         return ListofCategories;
     }
 
-    public List<String> AccessCategory(String CategoryName) throws FileNotFoundException {
+    public List<String> AccessCategory(String CategoryName) throws FileNotFoundException, IOException {
 //        ArrayList<String> Names = new ArrayList<>();
 //        File file = new File(CategoryName);
 //        if (file.isDirectory()) {
 //            Names = new ArrayList<>(Arrays.asList(file.list()));
 //
 //        }
-return null;
-//        return CategoryDBModel.RetrieveCategoryList();
+//        return Names;
+        Category c = new Category();
+        return GameDBModel.RetrieveGames(CategoryName, c).getListofGames();
     }
 
     public Game LoadGamePage(String GameName, String CategoryName) throws IOException, ClassNotFoundException {
@@ -44,7 +49,7 @@ return null;
         Game game = new Game();
         if (file.isDirectory()) {
             file = new File(CategoryName + "\\" + GameName);
-            GameDBModel.RetrieveGame(game, GameName);
+            game = GameDBModel.RetrieveGame(game, GameName);
         }
         return game;
     }

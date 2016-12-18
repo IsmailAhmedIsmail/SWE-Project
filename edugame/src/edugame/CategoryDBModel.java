@@ -12,7 +12,7 @@ import java.util.List;
 
 
 public class CategoryDBModel {
-    public ArrayList<String> RetrieveCategoryList() throws FileNotFoundException, IOException{
+    public static ArrayList<String> RetrieveCategoryList() throws FileNotFoundException, IOException{
         ArrayList<String> CategoryList= new ArrayList<String>();
         
  	FileInputStream file=new FileInputStream("Categories.txt");
@@ -21,8 +21,6 @@ public class CategoryDBModel {
         
         for(String line; (line = br.readLine()) != null; ) {
         {   
-       
-            
             CategoryList.add(line);
         }
 

@@ -23,16 +23,19 @@ import java.util.List;
  */
 public class GameDBModel {
 
-    public static void RetrieveGame(Game game, String name) throws IOException, ClassNotFoundException {
+    public static Game RetrieveGame(Game game, String name) throws IOException, ClassNotFoundException {
         File f = new File("Games\\" + name + "\\" + game.getName() + "\\info.txt");
         ObjectInputStream in = new ObjectInputStream(new FileInputStream(f));
         game = (Game) in.readObject();
         in.close();
+        return game;
     }
 
-    public static void RetrieveGames(String Catname, Category c) {
+    public static Category RetrieveGames(String Catname, Category c) {
         File f = new File("Games\\" + Catname);
         c.setListofGames((ArrayList<String>) Arrays.asList(f.list()));
+        c.setName(Catname);
+        return c;
     }
 
     public static void AddGame(Game game, String Catname) throws IOException {
@@ -51,16 +54,17 @@ public class GameDBModel {
         }
     }
 
-    public static void Retrieve(Level lev,String Gamename,String Catname) throws FileNotFoundException, IOException, ClassNotFoundException {
+    public static Level Retrieve(Level lev,String Gamename,String Catname) throws FileNotFoundException, IOException, ClassNotFoundException {
         File f = new File("Games\\" + Catname + "\\" + Gamename + "\\Levels"+lev.getNumber()+".txt");
         ObjectInputStream ois= new ObjectInputStream(new FileInputStream(f));
         int number= lev.getNumber();
-        if(lev instanceof MCQ)
-            lev=(MCQ)ois.readObject();
-        else if (lev instanceof TorF)
-            lev=(TorF)ois.readObject();
+        lev = (Level) ois.readObject();
+//        if(lev instanceof MCQ)
+//            lev=(MCQ)ois.readObject();
+//        else if (lev instanceof TorF)
+//            lev=(TorF)ois.readObject();
         lev.setNumber(number);
-        
+        return lev;
     }
 
     public static void SaveLevel(Game game, String Catname) throws FileNotFoundException, IOException {
