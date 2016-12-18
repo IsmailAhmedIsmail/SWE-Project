@@ -19,11 +19,12 @@ import java.io.Serializable;
  * @author musta
  */
 public class AchievementDBModel  {
-    public static void RetrieveAch(Achievements Ach,int UserID,String GameID) throws FileNotFoundException, IOException, ClassNotFoundException{
+    public static Achievements RetrieveAch(Achievements Ach,int UserID,String GameID) throws FileNotFoundException, IOException, ClassNotFoundException{
         File f = new File("Achievements\\"+UserID+"-"+GameID+".txt");
         ObjectInputStream in = new ObjectInputStream(new FileInputStream(f));
         Ach = (Achievements) in.readObject();
         in.close();
+        return Ach;
     }
     
     public static void UpdateAch(Achievements Ach, int UserID, String GameID) throws FileNotFoundException, IOException{

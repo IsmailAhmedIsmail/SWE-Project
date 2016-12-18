@@ -66,10 +66,6 @@ public class UserDBModel {
             f.close();
         }
     }
-//    void add(String name,String gender,int age, String mail, String username, String password, int ID){
-//        User
-//    }
-
 
     public static boolean UserNameQuery(String username) throws IOException, ClassNotFoundException {
         
@@ -106,24 +102,25 @@ public class UserDBModel {
     }
 
 
-    public static void retrieve(User user, int Id) throws IOException, ClassNotFoundException {
+    public static User retrieve(User user, int Id) throws IOException, ClassNotFoundException {
         
-        User u;
+//        User u;
         try (ObjectInputStream f = new ObjectInputStream(new FileInputStream("Users//users.txt"));){
             while (true) {
-                u = (User) f.readObject();
-                if (u.getID()==Id) {
-                    user = u;
-                    break;
+                user = (User) f.readObject();
+                if (user.getID()==Id) {
+//                    user = u;
+                    return user;
+//                    break;
                 }
 
             }
         } catch (EOFException ex) {
         }
+        return user;
     }
     public static int UserQuery(String username, String password) throws IOException, ClassNotFoundException
     {
-        
         User u;
         try (ObjectInputStream f = new ObjectInputStream(new FileInputStream("Users//users.txt"));){
             while (true) {
