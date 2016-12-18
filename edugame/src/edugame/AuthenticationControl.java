@@ -46,7 +46,7 @@ public class AuthenticationControl {
                 u = new Teacher();
                 h = new TeacherHomePage();
             }
-            UserDBModel.retrieve(u, ID);
+            u = UserDBModel.retrieve(u, ID);
             return u;
         }
         else{

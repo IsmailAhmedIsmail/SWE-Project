@@ -8,8 +8,8 @@ public class Edugame {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         WelcomePage r = new WelcomePage();
 //        r.Register();
-        User u = r.Login();
-        System.out.println(u.toString());
+//        User u = r.Login();
+//        System.out.println(u.toString());
     }
     
 }
