@@ -14,10 +14,10 @@ import java.util.ArrayList;
  */
 public class Category implements Serializable {
    public String name;
-  public  ArrayList <String> ListofGames= new ArrayList<> ();
+   transient public  ArrayList <String> ListofGames= new ArrayList<> ();
  public Category()
  {
-     
+     ListofGames= new ArrayList<>();
  }
     public Category(String name,ArrayList<String> ListofGames) {
         this.name = name;

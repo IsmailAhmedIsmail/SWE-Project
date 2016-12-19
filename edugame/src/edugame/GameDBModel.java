@@ -23,27 +23,52 @@ import java.util.List;
  */
 public class GameDBModel {
 
-    public static void RetrieveGame(Game game, String name) throws IOException, ClassNotFoundException {
+    public static Game RetrieveGame(Game game, String name) throws IOException, ClassNotFoundException {
         File f = new File("Games\\" + name + "\\" + game.getName() + "\\info.txt");
         ObjectInputStream in = new ObjectInputStream(new FileInputStream(f));
         game = (Game) in.readObject();
         in.close();
+        return game;
     }
 
-    public static void RetrieveGames(String Catname, Category c) {
+    public static Category RetrieveGames(String Catname, Category c) {
         File f = new File("Games\\" + Catname);
         c.setListofGames((ArrayList<String>) Arrays.asList(f.list()));
+        c.setName(Catname);
+        return c;
     }
 
     public static void AddGame(Game game, String Catname) throws IOException {
         File f = new File("Games\\" + Catname + "\\" + game.getName());
+        System.out.println(f.getAbsolutePath());
         f.mkdirs();
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f.getAbsolutePath() + "\\info.txt", true));
         oos.writeObject(game);
         oos.close();
+        SaveLevel(game,Catname);
+
+    }
+
+    public static Level Retrieve(Level lev, String Gamename, String Catname) throws FileNotFoundException, IOException, ClassNotFoundException {
+        File f = new File("Games\\" + Catname + "\\" + Gamename + "\\Levels" + lev.getNumber() + ".txt");
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+        int number = lev.getNumber();
+        lev = (Level) ois.readObject();
+//        if(lev instanceof MCQ)
+//            lev=(MCQ)ois.readObject();
+//        else if (lev instanceof TorF)
+//            lev=(TorF)ois.readObject();
+        lev.setNumber(number);
+        return lev;
+    }
+
+    public static void SaveLevel(Game game, String Catname) throws FileNotFoundException, IOException {
         ArrayList<Level> tmp = game.getListofLevels();
-        f = new File("Games\\" + Catname + "\\" + game.getName() + "\\Levels");
-        f.mkdirs();
+        File f = new File("Games\\" + Catname + "\\" + game.getName() + "\\Levels");
+        ObjectOutputStream oos;
+        if (!f.exists()) {
+            f.mkdirs();
+        }
         for (int i = 0; i < tmp.size(); i++) {
             oos = new ObjectOutputStream(new FileOutputStream(f.getAbsolutePath() + "\\" + (i + 1) + ".txt"));
             oos.writeObject(tmp.get(i));
@@ -51,38 +76,13 @@ public class GameDBModel {
         }
     }
 
-    public static void Retrieve(Level lev,String Gamename,String Catname) throws FileNotFoundException, IOException, ClassNotFoundException {
-        File f = new File("Games\\" + Catname + "\\" + Gamename + "\\Levels"+lev.getNumber()+".txt");
-        ObjectInputStream ois= new ObjectInputStream(new FileInputStream(f));
-        int number= lev.getNumber();
-        if(lev instanceof MCQ)
-            lev=(MCQ)ois.readObject();
-        else if (lev instanceof TorF)
-            lev=(TorF)ois.readObject();
-        lev.setNumber(number);
-        
-    }
-
-    public static void SaveLevel(Game game, String Catname) throws FileNotFoundException, IOException {
-        ArrayList<Level> levels= game.getListofLevels();
-        File f = new File("Games\\" + Catname + "\\" + game.getName() + "\\Levels");
-        for(int i=0;i<levels.size();i++)
-        {
-            ObjectOutputStream oos= new ObjectOutputStream(new FileOutputStream(f+"\\"+levels.get(i)));
-            oos.writeObject(levels.get(i));
-            oos.close();
-        }
-        
-        
-    }
-    public static boolean GameQuery(String Gamename , String Categoryname) throws  IOException, ClassNotFoundException{
-        Game game ;
-        try{
-        File f = new File("Games\\" + Categoryname + "\\" + Gamename + "\\info.txt");
-        ObjectInputStream in = new ObjectInputStream(new FileInputStream(f));
-        game = (Game) in.readObject();
-        }
-        catch(FileNotFoundException ex){
+    public static boolean GameQuery(String Gamename, String Categoryname) throws IOException, ClassNotFoundException {
+        Game game;
+        try {
+            File f = new File("Games\\" + Categoryname + "\\" + Gamename + "\\info.txt");
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream(f));
+            game = (Game) in.readObject();
+        } catch (FileNotFoundException ex) {
             return false;
         }
         return true;
