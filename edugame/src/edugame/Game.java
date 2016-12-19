@@ -5,6 +5,7 @@
  */
 package edugame;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,7 +14,7 @@ import java.util.Date;
  *
  * @author KarimEhab
  */
-public class Game {
+public class Game implements Serializable {
     String ID;
     String name;
     String type;
@@ -21,6 +22,7 @@ public class Game {
     Teacher Owner;
     int Levelno;
     public Game() {
+        ListofLevels= new ArrayList<>();
         
     }
     public Game(int Levelno, String name, String type, Teacher Owner) {
@@ -29,7 +31,7 @@ public class Game {
         this.type = type;
         this.Owner = Owner;
         this.Levelno=Levelno;
-        
+        ListofLevels= new ArrayList<>();
     }
     
     public String getID() {

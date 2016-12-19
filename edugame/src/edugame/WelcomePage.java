@@ -93,15 +93,17 @@ public class WelcomePage {
         System.out.print("Press 1 to login: ");
         input.nextInt();
         AuthenticationControl ac = new AuthenticationControl();
-        User u = ac.checkExistence(Username, Password);
+        User u = ac.checkExistence(Username, Password);       
         while ( u == null) {
-            ShowMsg("Re-Enter your username ans password again, please!");
+            input.nextLine();
+            ShowMsg("Re-Enter your username and password again, please!");
             System.out.print("Enter your Username: ");
             SetUsername(input.nextLine());
             System.out.print("Enter your Password: ");
             SetPassword(input.next());
             System.out.print("Press 1 to login: ");
             input.nextInt();
+            u=ac.checkExistence(Username,Password);
         }
         return u;
     }

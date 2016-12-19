@@ -24,7 +24,7 @@ import java.util.List;
 public class HomePageControl {
     ArrayList<String> ListofCategories = new ArrayList<String>();
 
-    public HomePageControl() throws IOException {
+    public HomePageControl() throws IOException, FileNotFoundException, ClassNotFoundException {
         ListofCategories = CategoryDBModel.RetrieveCategoryList();
     }
 

@@ -16,7 +16,7 @@ public class TorF extends Level implements Serializable {
     public TorF() {
     }
 
-    public TorF(String name, String Question, String RightAnswer) {
+    public TorF(String name, String Question, int RightAnswer) {
         super(name, Question, RightAnswer);
     }
     
