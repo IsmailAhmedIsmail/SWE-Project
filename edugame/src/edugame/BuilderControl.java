@@ -5,7 +5,9 @@
  */
 package edugame;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -33,18 +35,35 @@ public class BuilderControl {
                 lv.setName(levelName);
                 lv.setQuestion(question);
                 lv.setNumber(i+1);
-                lv.setRightAnswer(GameBuilder.GetRightAnswer()-1);
+                int rightAnswer=GameBuilder.GetRightAnswer()-1;
+                while(rightAnswer<1 || rightAnswer>4)
+                {
+                    System.out.println("Invalid Number!");
+                    rightAnswer=GameBuilder.GetRightAnswer()-1;
+                }
+                lv.setRightAnswer(rightAnswer);
                 game.setListofLevels(lv);
             } else {
-                TorF lv = new TorF(levelName, question, GameBuilder.GetRightAnswer());
+                System.out.println("1-True     2-False");
+                int rightAnswer=GameBuilder.GetRightAnswer()-1;
+                while(rightAnswer<1 || rightAnswer>2)
+                {
+                    System.out.println("Invalid Number!");
+                    rightAnswer=GameBuilder.GetRightAnswer()-1;
+                }
+                TorF lv = new TorF(levelName, question, rightAnswer);
                 lv.setNumber(i+1);
             }
         }
        GameDBModel.AddGame(game, catName);
     }
 
-    public static void CreateCategory(String catName) throws IOException {
-        CategoryDBModel.addCategory(catName);
+    public static void CreateCategory(String catName) throws IOException, FileNotFoundException, ClassNotFoundException {
+        ArrayList<String> categories =CategoryDBModel.RetrieveCategoryList();
+        if(categories.contains(catName))
+            System.out.println("Category Already Exists! Your game will be automatically added to it.");
+        else
+            CategoryDBModel.addCategory(catName);
     }
 
 }

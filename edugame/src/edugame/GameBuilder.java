@@ -23,6 +23,11 @@ public class GameBuilder {
         }
         System.out.print("0- others\nPress the number of Category to add your game to: ");
         int num = input.nextInt();
+        while(num<0 || num>CatNames.size())
+        {
+            System.out.println("Invalid Number, Please Insert a valid number: ");
+            num = input.nextInt();
+        }
         String name;
         input.nextLine();
         if(num == 0){
@@ -37,7 +42,7 @@ public class GameBuilder {
         return name;
     }
     public static String GetType(){
-        System.out.print("Enter the game type: ");
+        System.out.print("Enter the game type (MCQ) (T/F): ");
         return input.nextLine();
     }
     public static int GetNoLevel(){
