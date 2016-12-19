@@ -6,6 +6,7 @@
 package edugame;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,15 +18,17 @@ public abstract class Level implements Serializable{
     private String Question;
     transient private int number;
     private List<Answer> Answers;
-    private String RightAnswer ;
+    private int RightAnswer ;
 
     public Level() {
+        Answers= new ArrayList<>();
     }
 
-    public Level(String name, String Question, String RightAnswer) {
+    public Level(String name, String Question, int RightAnswer) {
         this.name = name;
         this.Question = Question;
         this.RightAnswer = RightAnswer;
+        Answers= new ArrayList<>();
     }
 
     public String getName() {
@@ -60,11 +63,11 @@ public abstract class Level implements Serializable{
         this.Answers.add(Ans);
     }
 
-    public String getRightAnswer() {
+    public int getRightAnswer() {
         return RightAnswer;
     }
 
-    public void setRightAnswer(String RightAnswer) {
+    public void setRightAnswer(int RightAnswer) {
         this.RightAnswer = RightAnswer;
     }
     

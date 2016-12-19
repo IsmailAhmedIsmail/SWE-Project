@@ -1,19 +1,19 @@
 
 package edugame;
 
-import java.io.File;
+import java.io.Serializable;
 
 
-public class Answer {
+public class Answer implements Serializable{
     private String Answer;
-    private File Iamge;
+//    private File Image;
 
     public Answer() {
     }
 
-    public Answer(String Answer, File Iamge) {
+    public Answer(String Answer) {
         this.Answer = Answer;
-        this.Iamge = Iamge;
+//        this.Image = Image;
     }
 
     public String getAnswer() {
@@ -24,12 +24,12 @@ public class Answer {
         this.Answer = Answer;
     }
 
-    public File getIamge() {
-        return Iamge;
-    }
+//    public File getImage() {
+//        return Image;
+//    }
 
-    public void setIamge(File Iamge) {
-        this.Iamge = Iamge;
-    }
+//    public void setImage(File Image) {
+//        this.Image = Iamge;
+//    }
     
 }

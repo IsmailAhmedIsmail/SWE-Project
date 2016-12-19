@@ -5,11 +5,13 @@
  */
 package edugame;
 
+import java.io.Serializable;
+
 /**
  *
  * @author KarimEhab
  */
-public class Achievements {
+public class Achievements implements Serializable {
     transient Game game;
     transient User user;
     int lastlevel;

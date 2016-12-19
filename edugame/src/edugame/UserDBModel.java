@@ -20,18 +20,7 @@ import java.io.OutputStream;
  * @author IsmailAhmed
  */
 public class UserDBModel {
-  static class AppendingObjectOutputStream extends ObjectOutputStream {
-
-  public AppendingObjectOutputStream(OutputStream out) throws IOException {
-    super(out);
-  }
-
-  @Override
-  protected void writeStreamHeader() throws IOException {
-    reset();
-  }
-
-}
+  
     public UserDBModel() {
     }
 
