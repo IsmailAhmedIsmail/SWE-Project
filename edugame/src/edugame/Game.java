@@ -15,7 +15,7 @@ import java.util.Date;
  * @author KarimEhab
  */
 public class Game implements Serializable {
-    String ID;
+    int ID;
     String name;
     String type;
     transient ArrayList <Level> ListofLevels= new ArrayList<Level> ();
@@ -26,7 +26,7 @@ public class Game implements Serializable {
         
     }
     public Game(int Levelno, String name, String type, Teacher Owner) {
-        this.ID = ID= String.valueOf(Date.from(Instant.EPOCH).getTime());
+        this.ID= (int) new Date().getTime();
         this.name = name;
         this.type = type;
         this.Owner = Owner;
@@ -34,13 +34,13 @@ public class Game implements Serializable {
         ListofLevels= new ArrayList<>();
     }
     
-    public String getID() {
+    public int getID() {
         return ID;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
-    }
+//    public void setID(String ID) {
+//        this.ID = ID;
+//    }
 
     public String getName() {
         return name;
