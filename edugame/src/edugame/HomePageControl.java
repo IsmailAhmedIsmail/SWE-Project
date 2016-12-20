@@ -45,11 +45,12 @@ public class HomePageControl {
     }
 
     public Game LoadGamePage(String GameName, String CategoryName) throws IOException, ClassNotFoundException {
-        File file = new File(CategoryName);
+        File file = new File("Games\\"+CategoryName);
         Game game = new Game();
+        game.setName(GameName);
         if (file.isDirectory()) {
-            file = new File(CategoryName + "\\" + GameName);
-            game = GameDBModel.RetrieveGame(game, GameName);
+            file = new File("Games\\"+CategoryName + "\\" + GameName);
+            game = GameDBModel.RetrieveGame(game, CategoryName);
         }
         return game;
     }

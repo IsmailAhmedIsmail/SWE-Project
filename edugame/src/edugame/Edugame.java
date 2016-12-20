@@ -12,10 +12,12 @@ public class Edugame {
         
         
         WelcomePage r = new WelcomePage();
-          r.Register();
-//        User u = r.Login();
+//          r.Register();
+        User u = r.Login();
 //        GameBuilder gb = new GameBuilder();
 //        gb.AddGame((Teacher)u);
+          GamePage gp= new GamePage();
+           gp.PlayGame(u);
 //        f.close();
     }
     
