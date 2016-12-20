@@ -61,13 +61,13 @@ public class AuthenticationControl {
     }
 
     public static void CreateUser(String Name, String Gender, int age, String email, String UserName, String Password, String Identity) throws IOException {
+        User u;
         if (Identity.equals("Teacher")) {
-            Teacher te = new Teacher(Name, Gender, age, email, UserName, Password);
-            UserDBModel.add(te);
+            u = new Teacher(Name, Gender, age, email, UserName, Password);
 
         } else {
-            Student st = new Student(Name, Gender, age, email, UserName, Password);
-            UserDBModel.add(st);
+            u = new Student(Name, Gender, age, email, UserName, Password);
         }
+        UserDBModel.add(u);
     }
 }
