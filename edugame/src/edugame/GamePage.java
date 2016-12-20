@@ -56,9 +56,9 @@ public class GamePage {
         System.out.println(msg);
     }
     public static int selectLevel(int lastLevel, int levelsno){
-        System.out.println("The game has "+levelsno+"\nSelect a level from 1 to "+(lastLevel+1));
+        System.out.println("The game has "+levelsno+" levels.\nSelect a level from 1 to "+(lastLevel+1));
         int num= input.nextInt()-1;
-        while(num<1 || num>lastLevel)
+        while(num<0 || num>lastLevel)
         {
             System.out.println("Level is locked! Please Select an available level");
             num=input.nextInt();
