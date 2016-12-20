@@ -62,7 +62,7 @@ public class GameDBModel {
     }
 
     public static Level Retrieve(Level lev, String Gamename, String Catname) throws FileNotFoundException, IOException, ClassNotFoundException {
-        File f = new File("Games\\" + Catname + "\\" + Gamename + "\\Levels" + lev.getNumber() + ".txt");
+        File f = new File("Games\\" + Catname + "\\" + Gamename + "\\Levels\\" + (lev.getNumber()+1) + ".txt");
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
         int number = lev.getNumber();
         lev = (Level) ois.readObject();

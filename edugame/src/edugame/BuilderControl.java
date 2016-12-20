@@ -36,7 +36,7 @@ public class BuilderControl {
                 lv.setQuestion(question);
                 lv.setNumber(i+1);
                 int rightAnswer=GameBuilder.GetRightAnswer()-1;
-                while(rightAnswer<1 || rightAnswer>4)
+                while(rightAnswer<0 || rightAnswer>3)
                 {
                     System.out.println("Invalid Number!");
                     rightAnswer=GameBuilder.GetRightAnswer()-1;

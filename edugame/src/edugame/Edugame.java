@@ -17,7 +17,7 @@ public class Edugame {
 //        GameBuilder gb = new GameBuilder();
 //        gb.AddGame((Teacher)u);
           GamePage gp= new GamePage();
-           gp.PlayGame(u);
+          gp.PlayGame(u);
 //        f.close();
     }
     
