@@ -27,7 +27,7 @@ public class WelcomePage {
         Age = age;
     }
 
-    public static void SetEmail(String email) {
+    public static void SetEmail(String email) {//check if it email or not
         Email = email;
     }
 
@@ -41,9 +41,9 @@ public class WelcomePage {
 
     public static void SelectIdentity(int i) {
         if (i == 1) {
-            Identity = "Student";
-        } else {
             Identity = "Teacher";
+        } else {
+            Identity = "Student";
         }
     }
 
@@ -63,9 +63,12 @@ public class WelcomePage {
         input.nextLine();
         System.out.print("Enter your Email: ");
         SetEmail(input.nextLine());
-        
+        while (!ac.EmailValidity(Email)) { //new Change
+            System.out.println("Enter a Valid Email address, please!");
+            SetEmail(input.nextLine());
+        }
         while (!ac.CheckAvailability(Email)) {
-            System.out.print("Email Already exists.\nRe-enter your email, please!");
+            System.out.println("Email Already exists.\nRe-enter your email, please!");
             SetEmail(input.nextLine());
         }
         System.out.print("Enter your Username: ");
@@ -76,7 +79,7 @@ public class WelcomePage {
         }
         System.out.print("Enter your Password: ");
         SetPassword(input.next());
-        System.out.print("Select 1 if Student, 2 if Teacher: ");
+        System.out.print("Select 1 if Teacher, 2 if Student: ");
         SelectIdentity(input.nextInt());
         System.out.print("Press 1 to submit: ");
         input.nextInt();
@@ -93,8 +96,8 @@ public class WelcomePage {
         System.out.print("Press 1 to login: ");
         input.nextInt();
         AuthenticationControl ac = new AuthenticationControl();
-        User u = ac.checkExistence(Username, Password);       
-        while ( u == null) {
+        User u = ac.checkExistence(Username, Password);
+        while (u == null) {
             input.nextLine();
             ShowMsg("Re-Enter your username and password again, please!");
             System.out.print("Enter your Username: ");
@@ -103,7 +106,7 @@ public class WelcomePage {
             SetPassword(input.next());
             System.out.print("Press 1 to login: ");
             input.nextInt();
-            u=ac.checkExistence(Username,Password);
+            u = ac.checkExistence(Username, Password);
         }
         return u;
     }

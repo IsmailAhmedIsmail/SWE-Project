@@ -16,6 +16,13 @@ public class AuthenticationControl {
     public AuthenticationControl() {
     }
 
+    public boolean EmailValidity(String email) { //new function
+        String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
+        java.util.regex.Matcher m = p.matcher(email);
+        return m.matches();
+    }
+
     public static boolean CheckAvailability(String Mail) throws IOException, ClassNotFoundException {
 //        UserDBModel u = null;
         if (UserDBModel.mailQuery(Mail)) {
@@ -39,7 +46,7 @@ public class AuthenticationControl {
         User u;
         Homepage h;
         if (ID != -1) {
-            if (UserDBModel.IdentityQuery(ID).equals("Student") ) {
+            if (UserDBModel.IdentityQuery(ID).equals("Student")) {
                 u = new Student();
                 h = new Homepage();
             } else {
@@ -48,8 +55,7 @@ public class AuthenticationControl {
             }
             u = UserDBModel.retrieve(u, ID);
             return u;
-        }
-        else{
+        } else {
             return null;
         }
     }
