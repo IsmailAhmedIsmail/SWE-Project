@@ -28,21 +28,33 @@ public class GameDBModel {
         ObjectInputStream in = new ObjectInputStream(new FileInputStream(f));
         game = (Game) in.readObject();
         in.close();
+        game.setListofLevels(new ArrayList<>());
+        ArrayList <Level> lvls=game.getListofLevels();
+        System.out.println(game.getLevelno());
+        for(int i=0;i<game.getLevelno();i++)
+        {
+            Level l;
+            if(game.getType().equals("MCQ"))
+                l= new MCQ();
+            else
+                l= new TorF();
+            l.setNumber(i);
+            lvls.add(GameDBModel.Retrieve(l, game.getName(), name));
+        }
         return game;
     }
 
     public static Category RetrieveGames(String Catname, Category c) {
         File f = new File("Games\\" + Catname);
-        c.setListofGames((ArrayList<String>) Arrays.asList(f.list()));
+        c.setListofGames(new ArrayList<String>(Arrays.asList(f.list())));
         c.setName(Catname);
         return c;
     }
 
     public static void AddGame(Game game, String Catname) throws IOException {
         File f = new File("Games\\" + Catname + "\\" + game.getName());
-        System.out.println(f.getAbsolutePath());
         f.mkdirs();
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f.getAbsolutePath() + "\\info.txt", true));
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f.getAbsolutePath() + "\\info.txt"));
         oos.writeObject(game);
         oos.close();
         SaveLevel(game,Catname);

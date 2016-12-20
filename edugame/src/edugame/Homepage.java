@@ -17,7 +17,7 @@ public class Homepage {
     public static void ShowCategories(String ListofCat){
         
     }
-    public void chooseCategory() throws IOException, ClassNotFoundException{
+    public Game chooseCategory() throws IOException, ClassNotFoundException{
         Scanner input = new Scanner(System.in);
         HomePageControl hpc = new HomePageControl();
         ArrayList<String> CatNames = hpc.getListofCategories();
@@ -34,11 +34,11 @@ public class Homepage {
         }
         System.out.print("Press the number of Game to choose it: ");
         int number = input.nextInt();
-        ChooseGame(GamesNames.get(number-1), CatNames.get(num-1));
+         return ChooseGame(GamesNames.get(number-1), CatNames.get(num-1));
     }
-    public void ChooseGame(String GameName, String CatName) throws IOException, ClassNotFoundException{
+    public Game ChooseGame(String GameName, String CatName) throws IOException, ClassNotFoundException{
         HomePageControl hpc = new HomePageControl();
         Game game = hpc.LoadGamePage(GameName, CatName);
-        
+        return game;
     }
 }
