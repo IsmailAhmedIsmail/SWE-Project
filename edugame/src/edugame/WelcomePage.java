@@ -1,5 +1,6 @@
 package edugame;
 
+import static edugame.Edugame.input;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -7,107 +8,118 @@ public class WelcomePage {
 
     static String Name, Gender, Email, Username, Password, Identity;
     static int Age;
-
-    public WelcomePage() {
+    
+    public WelcomePage() throws IOException, ClassNotFoundException {
+        welcome();
     }
 
-    public static void SetName(String name) {
-        Name = name;
+    public static String SetName() {
+        System.out.print("Enter your name: ");
+        return input.nextLine();
     }
 
-    public static void SelectGender(int i) {
+    public static String SelectGender() {
+        System.out.print("Select 1 if Male, 2 if Female: ");
+        int i;
+        i = input.nextInt();
         if (i == 1) {
-            Gender = "Male";
+            return  "Male";
         } else {
-            Gender = "Female";
+            return "Female";
         }
     }
 
-    public static void SetAge(int age) {
-        Age = age;
+    public static int SetAge() {
+        System.out.print("Enter your Age: ");
+        return input.nextInt();
+        
     }
 
-    public static void SetEmail(String email) {//check if it email or not
-        Email = email;
+    public static String SetEmail() {//check if it email or not
+        System.out.print("Enter your Email: ");
+        return input.nextLine();
+        
     }
 
-    public static void SetUsername(String username) {
-        Username = username;
+    public static String SetUsername() {
+        System.out.print("Enter your Username: ");
+        return(input.nextLine());
     }
 
-    public static void SetPassword(String password) {
-        Password = password;
+    public static String SetPassword() {
+        System.out.print("Enter your Password: ");
+        return(input.next());
     }
 
-    public static void SelectIdentity(int i) {
+    public static String SelectIdentity() {
+        System.out.print("Select 1 if Teacher, 2 if Student: ");
+        int i=input.nextInt();
         if (i == 1) {
-            Identity = "Teacher";
+            return "Teacher";
         } else {
-            Identity = "Student";
+            return "Student";
         }
     }
 
     public static void ShowMsg(String msg) {
         System.out.println(msg);
     }
-
-    public static void Register() throws IOException, ClassNotFoundException {
-        AuthenticationControl ac = new AuthenticationControl();
-        System.out.print("Enter your name: ");
-        Scanner input = new Scanner(System.in);
-        SetName(input.nextLine());
-        System.out.print("Select 1 if Male, 2 if Female: ");
-        SelectGender(input.nextInt());
-        System.out.print("Enter your Age: ");
-        SetAge(input.nextInt());
-        input.nextLine();
-        System.out.print("Enter your Email: ");
-        SetEmail(input.nextLine());
-        while (!ac.EmailValidity(Email)) { //new Change
-            System.out.println("Enter a Valid Email address, please!");
-            SetEmail(input.nextLine());
+    public static void welcome() throws IOException, ClassNotFoundException{
+        System.out.println("Welcome!\nChoose an operation:\n1-Register.\n2-Login\n0-Exit.");
+        int choice= input.nextInt();
+        while(choice<0 || choice>2)
+        {
+            System.out.println("Invalid Input, Enter a valid value: ");
+            choice= input.nextInt();
         }
-        while (!ac.CheckAvailability(Email)) {
-            System.out.println("Email Already exists.\nRe-enter your email, please!");
-            SetEmail(input.nextLine());
+        switch(choice)
+        {
+            case(0):
+            {
+                System.exit(0);
+                break;
+            }
+            case(1):
+            {
+                AuthenticationControl ac = new AuthenticationControl();
+                ac.Register();
+                break;
+            }
+            case(2):
+            {
+                AuthenticationControl ac = new AuthenticationControl();
+                ac.Login();
+                
+                break;
+            }
+                    
         }
-        System.out.print("Enter your Username: ");
-        SetUsername(input.nextLine());
-        while (!ac.CheckUserAvail(Username)) {
-            System.out.print("Username Already exists.\nRe-enter your Username, please!");
-            SetUsername(input.nextLine());
-        }
-        System.out.print("Enter your Password: ");
-        SetPassword(input.next());
-        System.out.print("Select 1 if Teacher, 2 if Student: ");
-        SelectIdentity(input.nextInt());
-        System.out.print("Press 1 to submit: ");
-        input.nextInt();
-        ac.CreateUser(Name, Gender, Age, Email, Username, Password, Identity);
-        System.out.println("Successfully Signed up.");
     }
-
-    public static User Login() throws IOException, ClassNotFoundException {
-        Scanner input = new Scanner(System.in);
-        System.out.print("Enter your Username: ");
-        SetUsername(input.nextLine());
-        System.out.print("Enter your Password: ");
-        SetPassword(input.next());
-        System.out.print("Press 1 to login: ");
-        input.nextInt();
-        AuthenticationControl ac = new AuthenticationControl();
-        User u = ac.checkExistence(Username, Password);
-        while (u == null) {
-            input.nextLine();
-            ShowMsg("Re-Enter your username and password again, please!");
-            System.out.print("Enter your Username: ");
-            SetUsername(input.nextLine());
-            System.out.print("Enter your Password: ");
-            SetPassword(input.next());
-            System.out.print("Press 1 to login: ");
-            input.nextInt();
-            u = ac.checkExistence(Username, Password);
-        }
-        return u;
-    }
+//    public static void Register() throws IOException, ClassNotFoundException {
+//        AuthenticationControl ac = new AuthenticationControl();
+//        
+//        while (!ac.EmailValidity(Email)) { //new Change
+//            System.out.println("Enter a Valid Email address, please!");
+//            SetEmail(input.nextLine());
+//        }
+//        while (!ac.CheckAvailability(Email)) {
+//            System.out.println("Email Already exists.\nRe-enter your email, please!");
+//            SetEmail(input.nextLine());
+//        }
+//        System.out.print("Enter your Username: ");
+//        SetUsername(input.nextLine());
+//        while (!ac.CheckUserAvail(Username)) {
+//            System.out.print("Username Already exists.\nRe-enter your Username, please!");
+//            SetUsername(input.nextLine());
+//        }
+//        System.out.print("Enter your Password: ");
+//        SetPassword(input.next());
+//        System.out.print("Select 1 if Teacher, 2 if Student: ");
+//        SelectIdentity(input.nextInt());
+//        System.out.print("Press 1 to submit: ");
+//        input.nextInt();
+//        ac.CreateUser(Name, Gender, Age, Email, Username, Password, Identity);
+//        System.out.println();
+//    }
+    
 }

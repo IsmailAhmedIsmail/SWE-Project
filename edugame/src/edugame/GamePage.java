@@ -8,8 +8,13 @@ import java.util.Scanner;
 public class GamePage {
 
     static Scanner input = new Scanner(System.in);
-    
+
     public GamePage() {
+    }
+    
+    public GamePage(User u, Game g) throws IOException, ClassNotFoundException {
+        PlayGame(u,g);
+        
     }
     
 //    public static Level Showlevels(List<Level> levels){
@@ -65,15 +70,15 @@ public class GamePage {
         }
         return num;
     }
-    public void PlayGame(User u) throws IOException, ClassNotFoundException{
-        Homepage hp;
-        if(u.getIdentity().equals("Student")){
-            hp = new Homepage();
-        }
-        else{
-            hp = new TeacherHomePage();
-        }
-        Game g = hp.chooseCategory();
+    public void PlayGame(User u,Game g) throws IOException, ClassNotFoundException{
+//        Homepage hp;
+//        if(u.getIdentity().equals("Student")){
+//            hp = new Homepage();
+//        }
+//        else{
+//            hp = new TeacherHomePage();
+//        }
+//        Game g = hp.chooseCategory();
         GameControl gc = new GameControl();
         gc.startGame(g, u);
         

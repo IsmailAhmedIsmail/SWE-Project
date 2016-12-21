@@ -24,6 +24,8 @@ public class GameControl implements Serializable{
         GamePage gp = new GamePage();
         game = g;
         Achievements ach = new Achievements();
+        System.out.println(u.toString());
+//        System.out.println(g.toString());
         ach.setGame(g);
         ach.setUser(u);
         ach = AchievementDBModel.RetrieveAch(ach);
@@ -31,7 +33,7 @@ public class GameControl implements Serializable{
         Level l; int selectedAnswer;
         for(int i=selectedLvl;i<game.getLevelno();i++)
         {
-            l= game.getListofLevels().get(selectedLvl);
+            l= game.getListofLevels().get(i);
             selectedAnswer=gp.ShowLevel(l);
             while(selectedAnswer!=l.getRightAnswer())
             {

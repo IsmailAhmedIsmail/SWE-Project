@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package edugame;
-
+import static edugame.Edugame.input;
 import java.io.IOException;
 
 /**
@@ -41,17 +41,59 @@ public class AuthenticationControl {
         }
     }
 
+    public void Login() throws IOException, ClassNotFoundException {
+        input.nextLine();
+        String Username = WelcomePage.SetUsername();
+        String Password = WelcomePage.SetPassword();
+        User u = checkExistence(Username, Password);
+        while (u == null) {
+            WelcomePage.ShowMsg("Invalid Username or Password, Reenter Values");
+            Username = WelcomePage.SetUsername();
+            Password = WelcomePage.SetPassword();
+            u = checkExistence(Username, Password);
+        }
+        if(u instanceof Student)
+        {
+            Homepage hp= new Homepage(u);
+        }
+        else
+        {
+            Homepage hp= new TeacherHomePage((Teacher)u);
+        }
+        
+    }
+    public void Register() throws IOException, ClassNotFoundException{
+        
+        input.nextLine();
+        String Name= WelcomePage.SetName();
+        
+        String Gender= WelcomePage.SelectGender();
+        
+        int Age= WelcomePage.SetAge();
+        input.nextLine();
+        String Email= WelcomePage.SetEmail();
+        String Username=WelcomePage.SetUsername();
+        while (!CheckUserAvail(Username)) {
+            WelcomePage.ShowMsg("Username Already exists.\nRe-enter your Username, please!");
+            Username=WelcomePage.SetUsername();
+        }
+        String Password=WelcomePage.SetPassword();
+        String Identity=WelcomePage.SelectIdentity();
+        input.nextLine();
+        CreateUser(Name, Gender, Age, Email, Username, Password, Identity);
+        WelcomePage.ShowMsg("Successfully Signed up.");
+    }
     public static User checkExistence(String username, String password) throws IOException, ClassNotFoundException {
         int ID = UserDBModel.UserQuery(username, password);
         User u;
-        Homepage h;
+        
         if (ID != -1) {
             if (UserDBModel.IdentityQuery(ID).equals("Student")) {
                 u = new Student();
-                h = new Homepage();
+               
             } else {
                 u = new Teacher();
-                h = new TeacherHomePage();
+               
             }
             u = UserDBModel.retrieve(u, ID);
             return u;

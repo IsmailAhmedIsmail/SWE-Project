@@ -46,13 +46,14 @@ public class BuilderControl {
             } else {
                 System.out.println("1-True     2-False");
                 int rightAnswer=GameBuilder.GetRightAnswer()-1;
-                while(rightAnswer<1 || rightAnswer>2)
+                while(rightAnswer<0 || rightAnswer>1)
                 {
                     System.out.println("Invalid Number!");
                     rightAnswer=GameBuilder.GetRightAnswer()-1;
                 }
                 TorF lv = new TorF(levelName, question, rightAnswer);
                 lv.setNumber(i+1);
+                game.setListofLevels(lv);
             }
         }
        GameDBModel.AddGame(game, catName);
