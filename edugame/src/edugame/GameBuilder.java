@@ -71,7 +71,7 @@ public class GameBuilder {
         String gameName = GetName();
         while(bc.CheckDuplicate(gameName, catName)){
             System.out.println("Game name already exists!");
-            GetName();
+            gameName=GetName();
         }
         String type = GetType();
         int n = GetNoLevel();
