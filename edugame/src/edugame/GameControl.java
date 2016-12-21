@@ -47,7 +47,7 @@ public class GameControl implements Serializable{
                 AchievementDBModel.UpdateAch(ach);
             }
         }
-        gp.ShowMsg("Con3'orrratulations! You have affelt elGaaame!");
+       gp.ShowMsg("Con3'orrratulations! You have affelt elGaaame!");
     }
 //    public void loadLevel(int levelindex,int lastindex)
 //    {
