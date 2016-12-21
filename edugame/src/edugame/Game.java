@@ -33,6 +33,11 @@ public class Game implements Serializable {
         this.Levelno=Levelno;
         ListofLevels= new ArrayList<>();
     }
+
+    @Override
+    public String toString() {
+        return "Game{" + "ID=" + ID + ", name=" + name + ", type=" + type + ", ListofLevels=" + ListofLevels + ", Owner=" + Owner + ", Levelno=" + Levelno + '}';
+    }
     
     public int getID() {
         return ID;
