@@ -19,18 +19,30 @@ import java.io.Serializable;
  * @author Alaa
  */
 public class AchievementDBModel  {
-    public static Achievements RetrieveAch(Achievements Ach,int UserID,String GameID) throws FileNotFoundException, IOException, ClassNotFoundException{
+    public static Achievements RetrieveAch(Achievements ach) throws FileNotFoundException, IOException, ClassNotFoundException{
+        int UserID= ach.getUser().getID();
+        int GameID= ach.getGame().getID();
         File f = new File("Achievements\\"+UserID+"-"+GameID+".txt");
-        ObjectInputStream in = new ObjectInputStream(new FileInputStream(f));
-        Ach = (Achievements) in.readObject();
-        in.close();
-        return Ach;
+        if(!f.exists())
+        {
+            ach.setLastlevel(0);
+            UpdateAch(ach);
+        }
+        else
+        {
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream(f));
+            ach = (Achievements) in.readObject();
+            in.close();
+        }
+        return ach;
     }
     
-    public static void UpdateAch(Achievements Ach, int UserID, String GameID) throws FileNotFoundException, IOException{
+    public static void UpdateAch(Achievements ach) throws FileNotFoundException, IOException{
+        int UserID= ach.getUser().getID();
+        int GameID= ach.getGame().getID();
         File f = new File("Achievements\\"+UserID+"-"+GameID+".txt");
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
-        oos.writeObject(Ach);
+        oos.writeObject(ach);
         oos.close();
     }
 }

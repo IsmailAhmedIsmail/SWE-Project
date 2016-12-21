@@ -24,15 +24,21 @@ import java.util.List;
 public class HomePageControl {
     ArrayList<String> ListofCategories = new ArrayList<String>();
 
-    public HomePageControl() throws IOException, FileNotFoundException, ClassNotFoundException {
+    public HomePageControl(User u) throws IOException, FileNotFoundException, ClassNotFoundException {
         ListofCategories = CategoryDBModel.RetrieveCategoryList();
+        GamePage gp = new GamePage(u,ChooseGame());
+        
+    }
+
+    HomePageControl() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public ArrayList<String> getListofCategories() {
         return ListofCategories;
     }
 
-    public List<String> AccessCategory(String CategoryName) throws FileNotFoundException, IOException {
+    public ArrayList<String> AccessCategory(String CategoryName) throws FileNotFoundException, IOException {
 //        ArrayList<String> Names = new ArrayList<>();
 //        File file = new File(CategoryName);
 //        if (file.isDirectory()) {
@@ -45,12 +51,21 @@ public class HomePageControl {
     }
 
     public Game LoadGamePage(String GameName, String CategoryName) throws IOException, ClassNotFoundException {
-        File file = new File(CategoryName);
+        File file = new File("Games\\"+CategoryName);
         Game game = new Game();
+        game.setName(GameName);
         if (file.isDirectory()) {
-            file = new File(CategoryName + "\\" + GameName);
-            game = GameDBModel.RetrieveGame(game, GameName);
+            file = new File("Games\\"+CategoryName + "\\" + GameName);
+            game = GameDBModel.RetrieveGame(game, CategoryName);
         }
+        return game;
+    }
+    public Game ChooseGame() throws IOException, ClassNotFoundException{
+        ArrayList<String> CatNames = getListofCategories();
+        int num=Homepage.SelectCategory(CatNames);
+        ArrayList<String> GamesNames = AccessCategory(CatNames.get(num-1));
+        int number = Homepage.SelectGame(GamesNames);
+        Game game = LoadGamePage(GamesNames.get(number-1), CatNames.get(num-1));
         return game;
     }
 }
