@@ -5,9 +5,6 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class WelcomePage {
-
-    static String Name, Gender, Email, Username, Password, Identity;
-    static int Age;
     
     public WelcomePage() throws IOException, ClassNotFoundException {
         welcome();
