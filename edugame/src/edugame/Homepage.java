@@ -27,7 +27,7 @@ public class Homepage {
         else
         {
             HomePageControl hpc= new HomePageControl(u);
-            hpc.ChooseGame();
+//            hpc.ChooseGame();
         }
             
     }

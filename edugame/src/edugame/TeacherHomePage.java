@@ -26,7 +26,7 @@ public class TeacherHomePage extends Homepage {
             System.exit(0);
         } else if (choice == 1) {
             HomePageControl hpc= new HomePageControl(u);
-            hpc.ChooseGame();
+//            hpc.ChooseGame();
         }
         else{
             GameBuilder gb = new GameBuilder();

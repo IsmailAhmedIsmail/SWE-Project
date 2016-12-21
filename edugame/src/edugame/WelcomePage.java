@@ -48,7 +48,7 @@ public class WelcomePage {
 
     public static String SetPassword() {
         System.out.print("Enter your Password: ");
-        return(input.next());
+        return(input.nextLine());
     }
 
     public static String SelectIdentity() {
