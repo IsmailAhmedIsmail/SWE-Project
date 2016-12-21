@@ -38,7 +38,13 @@ public class Homepage {
             System.out.println((i+1)+"- "+CatNames.get(i));
         }
         System.out.print("Press the number of Category to choose it: ");
-        return input.nextInt();
+        int choice= input.nextInt();
+        while(choice<1 || choice>CatNames.size())
+        {
+            System.out.println("Invalid Choice. Please enter a valid value:");
+            choice= input.nextInt();
+        }
+        return choice;
     }
     public static int SelectGame(ArrayList<String> GameNames){
         System.out.println("Games are:");
@@ -46,7 +52,13 @@ public class Homepage {
             System.out.println((i+1)+"- "+GameNames.get(i));
         }
         System.out.print("Press the number of Game to choose it: ");
-        return input.nextInt();
+        int choice= input.nextInt();
+        while(choice<1 || choice>GameNames.size())
+        {
+            System.out.println("Invalid Choice. Please enter a valid value:");
+            choice= input.nextInt();
+        }
+        return choice;
     }
     public static void ShowMsg(String msg) {
         System.out.println(msg);
