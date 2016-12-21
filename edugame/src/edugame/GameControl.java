@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.Serializable;
 
 public class GameControl implements Serializable{
-    private Game game;
+ 
     public GameControl() {
     }
 
@@ -22,18 +22,17 @@ public class GameControl implements Serializable{
 //    }
     public void startGame(Game g, User u) throws IOException, FileNotFoundException, ClassNotFoundException{
         GamePage gp = new GamePage();
-        game = g;
         Achievements ach = new Achievements();
-        System.out.println(u.toString());
+//        System.out.println(u.toString());
 //        System.out.println(g.toString());
         ach.setGame(g);
         ach.setUser(u);
         ach = AchievementDBModel.RetrieveAch(ach);
         int selectedLvl=gp.selectLevel(ach.getLastlevel(), g.getLevelno());
         Level l; int selectedAnswer;
-        for(int i=selectedLvl;i<game.getLevelno();i++)
+        for(int i=selectedLvl;i<g.getLevelno();i++)
         {
-            l= game.getListofLevels().get(i);
+            l= g.getListofLevels().get(i);
             selectedAnswer=gp.ShowLevel(l);
             while(selectedAnswer!=l.getRightAnswer())
             {
@@ -41,7 +40,7 @@ public class GameControl implements Serializable{
                 selectedAnswer=gp.ShowLevel(l);
             }
             gp.ShowMsg("Corrrrrrect!");
-            if(i+1>ach.getLastlevel() && i+1<game.getLevelno())
+            if(i+1>ach.getLastlevel() && i+1<g.getLevelno())
             {
                 ach.setLastlevel(i+1);
                 AchievementDBModel.UpdateAch(ach);
@@ -56,14 +55,14 @@ public class GameControl implements Serializable{
 //        GameDBModel.Retrieve(l, game.getName(), );
 //    }
     
-    public void validateAnswer(int levelIndex, String userAnswer){
-        if(game.CheckAnswer(levelIndex, userAnswer)){
-//            AchievementDBModel.UpdateAch(Ach, levelIndex, userAnswer);
-        }
-        else{
-            GamePage.ShowMsg("Re-Enter your Answer");
-        }
-    }
+//    public void validateAnswer(int levelIndex, String userAnswer){
+//        if(game.CheckAnswer(levelIndex, userAnswer)){
+////            AchievementDBModel.UpdateAch(Ach, levelIndex, userAnswer);
+//        }
+//        else{
+//            GamePage.ShowMsg("Re-Enter your Answer");
+//        }
+//    }
     
     
 }

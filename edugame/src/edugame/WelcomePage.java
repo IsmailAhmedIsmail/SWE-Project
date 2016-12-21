@@ -22,6 +22,11 @@ public class WelcomePage {
         System.out.print("Select 1 if Male, 2 if Female: ");
         int i;
         i = input.nextInt();
+        while(i<1 || i>2)
+        {
+            System.out.println("Invalid Input. Please Enter a valid input:");
+            i = input.nextInt();
+        }
         if (i == 1) {
             return  "Male";
         } else {
@@ -48,12 +53,17 @@ public class WelcomePage {
 
     public static String SetPassword() {
         System.out.print("Enter your Password: ");
-        return(input.next());
+        return(input.nextLine());
     }
 
     public static String SelectIdentity() {
         System.out.print("Select 1 if Teacher, 2 if Student: ");
         int i=input.nextInt();
+        while(i<1 || i>2)
+        {
+            System.out.println("Invalid Input. Please Enter a valid input:");
+            i = input.nextInt();
+        }
         if (i == 1) {
             return "Teacher";
         } else {

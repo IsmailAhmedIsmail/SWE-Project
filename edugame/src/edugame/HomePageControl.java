@@ -30,8 +30,8 @@ public class HomePageControl {
         
     }
 
-    HomePageControl() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    HomePageControl() throws IOException, FileNotFoundException, ClassNotFoundException { 
+        ListofCategories = CategoryDBModel.RetrieveCategoryList();
     }
 
     public ArrayList<String> getListofCategories() {
