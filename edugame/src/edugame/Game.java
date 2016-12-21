@@ -93,11 +93,6 @@ public class Game implements Serializable {
         Level CurrentLevel=  ListofLevels.get(levelindex);
         return CurrentLevel;
     }
-    public void  addlevel (Level newlevel)
-    {
-        ListofLevels.add(newlevel);
-        
-    }
       public boolean CheckAnswer (int LevelIndex, String ans)
       {
           Level CheckingLevel= getlevel(LevelIndex);
