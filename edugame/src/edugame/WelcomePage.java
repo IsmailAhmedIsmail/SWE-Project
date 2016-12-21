@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class WelcomePage {
-    
     public WelcomePage() throws IOException, ClassNotFoundException {
         welcome();
     }
